@@ -1,0 +1,33 @@
+.unique-title{
+	text-transform: capitalize;
+	font-size: 50px;
+}
+
+.container{
+	display: flex;
+	justify-content: space-between;
+
+}
+.button{
+	border: 1px solid rgba(63,63,61,0.64);
+	border-radius: 5px;
+	background-color: rgba(175,175,175,0.64);
+	padding: 10px;
+	cursor: pointer;
+	width: 150px;
+}
+.button:hover{
+	background-color: rgba(216,216,216,0.64);
+}
+.button-list{
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+
+}
+.button-download{
+	width: 100%;
+}
+/*border: 1px solid rgba(63,63,61,0.64);*/
+/*border-radius: 5px;*/
+/*background-color: rgba(175,175,175,0.64);*/

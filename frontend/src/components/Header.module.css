@@ -1,0 +1,29 @@
+.header{
+	background-color: rgba(216,216,216,0.64);
+	padding: 50px 40px;
+
+}
+
+.header ul{
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+.header li:first-child{
+	font-family: "TT Norms Black";
+	font-weight: bold;
+	font-size: 50px;
+	margin-right: 40px;
+}
+.header li:not(:first-child){
+	background-color: rgba(253,253,254,0.64);
+	color: rgba(73,73,73,0.64);
+	padding: 10px;
+	border-radius: 10px;
+	height: 25px;
+}
+.header li:not(:first-child):hover{
+	cursor: pointer;
+	background-color: rgba(239,239,241,0.64);
+}
