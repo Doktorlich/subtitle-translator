@@ -1,16 +1,10 @@
-.item {
-  display: flex;
- justify-content: space-between;
-}
-.name-file {
-  width: 150px;
-}
 .button {
 	font-size: 14px;
 	font-weight: bold;
 	padding: 5px;
 	border: 1px solid ;
 	border-radius: 50%;
+	cursor: pointer;
 }
 
 .button-translate {
@@ -21,7 +15,17 @@
 	background-color: rgba(244,213,168,0.64);
 }
 
+.button-check{
+background-color: rgba(172,238,198,0.64);
+}
+.button-download{
+	background-color: rgba(252,245,180,0.64);
+}
+
 .block{
 	display: flex;
 	gap: 5px;
+}
+.button:hover{
+	background-color: transparent;
 }

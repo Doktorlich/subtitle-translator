@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 export interface ButtonType {
   children: ReactNode;
-  className?: string | string[];
+  className?: string;
 }
 
 
@@ -11,6 +11,13 @@ export interface CardContainer {
   children: ReactNode;
 }
 
-export  interface BlockFileList {
+export  interface Children {
   children: ReactNode;
+}
+
+
+export interface SubtitleItemProps {
+  fileName: string;
+  projectId: string | number; // укажите тип, который используется в ISubtitleProject
+  children?: ReactNode;      // ReactNode — это стандартный тип для дочерних элементов в React
 }

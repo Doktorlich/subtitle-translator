@@ -1,0 +1,7 @@
+.item {
+  display: flex;
+ justify-content: space-between;
+}
+.name-file {
+  width: 150px;
+}

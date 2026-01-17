@@ -21,3 +21,6 @@ export interface ISubtitleProject {
   status:SubtitleStatus;
   lines:ISubtitleLine[];
 }
+export interface SubtitleState {
+  subtitleOriginalList: ISubtitleProject[];
+}

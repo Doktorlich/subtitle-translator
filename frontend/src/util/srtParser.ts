@@ -41,7 +41,7 @@ export const parserVTT = (fileContent: string): ISubtitleLine[] => {
         originalText: text,
       };
     });
-  console.log(formatSub);
+  // console.log(formatSub);
   return formatSub;
 };
 
