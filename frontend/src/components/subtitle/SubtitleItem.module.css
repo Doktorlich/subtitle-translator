@@ -1,7 +1,17 @@
 .item {
   display: flex;
- justify-content: space-between;
+  justify-content: space-between;
+
+}
+
+.item:hover{
+	background-color: rgba(178,178,179,0.64);
 }
 .name-file {
-  width: 150px;
+  width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+	cursor: default;
 }

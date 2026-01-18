@@ -1,6 +1,7 @@
 import Button from "../UI/ButtonItem.tsx";
 
 import classes from "./FileActions.module.css";
+import Status from "../UI/Status.tsx";
 
 export default function OriginalFileActions() {
   return (
@@ -12,7 +13,7 @@ export default function OriginalFileActions() {
         TRANS
       </Button>
       {/*ТУТ БУДЕТ ДИНАМИЧЕСКИЙ КОМПОНЕНТ*/}
-      <p>STATUS</p>
+      <Status status={"loading"}/>
     </div>
   );
 }

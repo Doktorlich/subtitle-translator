@@ -1,0 +1,36 @@
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	border: 1px solid black;
+	border-radius: 50%;
+	overflow: hidden;
+	width: 35px;
+	height: 30px;
+
+
+}
+
+.status-idle {
+	background-color: rgba(225,225,226,0.64);
+}
+.status-loading {
+	background-color: rgba(232,228,187,0.64);
+}
+.status-translating {
+	background-color: #d8e607;
+}
+.status-completed {
+	background-color: #13e600;
+}
+.status-error {
+	background-color: #e6001a;
+}
+.status-verifying{
+	background-color: #acc0e6;
+}
+
+.status-content {
+
+}
