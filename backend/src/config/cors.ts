@@ -2,7 +2,7 @@ import { type CorsOptions } from 'cors';
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "ADD-YOUR-DOMAIN-FRONTEND" // Ссылка на ваш фронтенд
+  "http://localhost:8080" // Ссылка на ваш фронтенд
 ];
 
  export const corsOptions: CorsOptions = {

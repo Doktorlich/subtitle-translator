@@ -11,6 +11,10 @@ import FilePicker from "../components/UI/FilePicker.tsx";
 import { useAppSelector } from "../hooks/hooks.ts";
 import TranslatedFileActions from "../components/subtitle/TranslatedFileActions.tsx";
 import ModelSelector from "../components/ModelSelector/ModelSelector.tsx";
+import { useQuery } from "@tanstack/react-query";
+import { getFilesSubtitle } from "../services/client.ts";
+import type { ISubtitleProject } from "../models/subtitle.ts";
+import type { IGetFilesResponse } from "../models/api-responses.ts";
 
 export default function HomePage() {
   // Используем селектор, чтобы получить массив projects из всего store
@@ -18,6 +22,28 @@ export default function HomePage() {
   const subtitleProjects = useAppSelector(
     (state) => state.subtitles.subtitleOriginalList,
   );
+
+  //работа с TSQ
+  const { data, isLoading, isError, error } = useQuery<IGetFilesResponse, Error, IGetFilesResponse>({
+    queryKey: ["files"],
+    queryFn: getFilesSubtitle,
+  });
+
+let filesSubtitle;
+ if (isLoading){
+   filesSubtitle = <p>Loading...</p>
+ }
+ if (data){
+   filesSubtitle = data?.filesSubtitle.map((project: ISubtitleProject) => (
+     <SubtitleItem
+       key={project.id} // Всегда нужен уникальный key для списка
+       fileName={project.fileName} // Передаем имя файла в дочерний компонент
+       projectId={project.id} // Передаем ID для дальнейших действий (DEL/TRANS)
+     >
+       <OriginalFileActions />
+     </SubtitleItem>
+   ));
+ }
 
   // Дополнительно можно получить статус из UI при его реализации:
   // const uiStatuses = useAppSelector(state => state.ui.fileStatuses);
@@ -31,15 +57,7 @@ export default function HomePage() {
             <Button className={classes.button}>Translate ALL</Button>
           </div>
           <SubtitleList>
-            {subtitleProjects.map((project) => (
-              <SubtitleItem
-                key={project.id} // Всегда нужен уникальный key для списка
-                fileName={project.fileName} // Передаем имя файла в дочерний компонент
-                projectId={project.id} // Передаем ID для дальнейших действий (DEL/TRANS)
-              >
-                <OriginalFileActions />
-              </SubtitleItem>
-            ))}
+            {filesSubtitle}
           </SubtitleList>
           {/*ДУМАЮ ТУТ ТО ЖЕ СДЕЛАТЬ В ВИДЕ КОМПОНЕНТА,
            Т К ПРИДЕТСЯ СВЯЗЫВАТЬ ВЗАИМОДЕЙСТВИЕ INPUT С КАСТОМНЫМ КОМПОНЕНТОМ*/}
@@ -54,10 +72,10 @@ export default function HomePage() {
 
         <ModelSelector />
 
-        <CardContainer title={"Storage translate file"}>
+        <CardContainer title={"Storage translated files"}>
           <div className={classes["button-list"]}>
             <Button className={classes.button}>Clear All</Button>
-            <Button className={classes.button}>Translate ALL</Button>
+            <Button className={classes.button}>Download All</Button>
           </div>
           {/*ТЕСТОВЫЙ ПРИМЕР*/}
           <SubtitleList>

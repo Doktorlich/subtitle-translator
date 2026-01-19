@@ -16,7 +16,7 @@ registerProcessEvents();
 //2 Обычные middleware (cors, json)
 app.use(cors(corsOptions));
 app.use(loggerMorgan);
-app.use(securityHelmet);
+// app.use(securityHelmet);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //3 маршруты

@@ -16,7 +16,7 @@ export interface ISubtitleLine {
 }
 
 export interface ISubtitleProject {
-  id:string;
+  _id:string;
   fileName:string;
   status:SubtitleStatus;
   lines:ISubtitleLine[];
