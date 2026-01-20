@@ -1,3 +1,5 @@
+import * as React from "react";
+
 export type SubtitleStatus =
   | "idle"
   | "loading"
@@ -26,3 +28,9 @@ export interface ISubtitleProject {
 export interface SubtitleState {
   subtitleOriginalList: ISubtitleProject[];
 }
+
+export interface SubtitleItemProps extends Pick<ISubtitleProject, 'fileName'> {
+    children: React.ReactNode;
+}
+
+export interface OriginalFileActionsProps extends Pick<ISubtitleProject, 'id' | 'status'> {}

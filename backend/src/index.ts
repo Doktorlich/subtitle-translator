@@ -8,7 +8,6 @@ validateEnv();
 
 connectDb()
   .then(() => {
-    console.log(typeof process.env.PORT);
     const server = app.listen(process.env.PORT , () => {
       console.log(`Server is running on port ${process.env.PORT}`);
       initGracefulShutdown(server);

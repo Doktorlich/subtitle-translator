@@ -12,7 +12,7 @@ const projectSchema = new Schema<ISubtitleProject>(
     // Используем ваш UUID в качестве главного ключа базы данных.
     // Мы называем его _id, так как MongoDB физически требует этот ключ для индексации.
     _id: { type: String, required: true },
-
+    type: { index: true, type: String, enum: ["original", "translated"], required: true },
     // Имя файла субтитров
     fileName: { type: String, required: true },
 

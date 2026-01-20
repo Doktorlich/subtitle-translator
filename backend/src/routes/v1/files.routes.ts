@@ -9,10 +9,12 @@ import { filesControllers } from "../../controllers/index.js";
 
 const router = Router();
 //test
-router.get("/files/upload", function (req: Request, res: Response) {
-  res.send("You visit the upload route");
-});
+// router.get("/files/upload", function (req: Request, res: Response) {
+//   res.send("You visit the upload route");
+// });
 
 router.get("/files", filesControllers.getFiles);
 router.post("/files/upload", filesControllers.postUpload );
+router.delete("/files/delete",  filesControllers.deleteAllFile);
+router.delete("/files/:id/delete",  filesControllers.deleteFile);
 export default router;

@@ -3,7 +3,7 @@ import type { SubtitleItemProps } from "../../models/typesUI.ts";
 
 
 
-export default function SubtitleItem({ fileName, children }:SubtitleItemProps) {
+export default function SubtitleItem({ fileName, children }:Pick<SubtitleItemProps, "fileName" | "children">) {
   return (
     <li className={classes.item} >
       <p className={classes["name-file"]} title={fileName}>{fileName}</p>
@@ -11,3 +11,4 @@ export default function SubtitleItem({ fileName, children }:SubtitleItemProps) {
     </li>
   );
 }
+

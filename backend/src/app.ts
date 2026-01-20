@@ -17,8 +17,8 @@ registerProcessEvents();
 app.use(cors(corsOptions));
 app.use(loggerMorgan);
 // app.use(securityHelmet);
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 //3 маршруты
 app.use(routes);
 //4 После всех маршрутов — обработчик 404
