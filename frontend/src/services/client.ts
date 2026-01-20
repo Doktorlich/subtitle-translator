@@ -5,7 +5,7 @@ import type { ISubtitleProject } from "../models/subtitle.ts";
 export const queryClient = new QueryClient();
 
 export async function getFilesSubtitle(): Promise<IGetFilesResponse[]> {
-    await new Promise(resolve => setTimeout(resolve, 2500));
+    // await new Promise(resolve => setTimeout(resolve, 2500));
     const response = await fetch("api/v1/files", { method: "GET" });
 
     if (!response.ok) {

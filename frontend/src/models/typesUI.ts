@@ -4,6 +4,7 @@ export interface ButtonType {
     children: ReactNode;
     className?: string;
     onClick?: () => void;
+    disabled?: boolean
 }
 
 export interface CardContainer {
