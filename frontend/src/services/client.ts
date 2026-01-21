@@ -6,7 +6,7 @@ export const queryClient = new QueryClient();
 
 export async function getFilesSubtitle(): Promise<IGetFilesResponse[]> {
     // await new Promise(resolve => setTimeout(resolve, 2500));
-    const response = await fetch("api/v1/files", { method: "GET" });
+    const response = await fetch("api/v1/files/original", { method: "GET" });
 
     if (!response.ok) {
         const error = new Error("An error occurred while fetching the files subtitle");

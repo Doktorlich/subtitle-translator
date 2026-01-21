@@ -3,11 +3,20 @@ import {
   deleteOriginalFiles,
   getOriginalFiles,
   postUpload,
-} from "./files/files.controller.js";
+} from "./files/filesOriginal.controller.js";
+import {
+  getTranslatedFiles,
+  postTranslateFileId,
+  postTranslateFiles,
+} from "./files/filesTranslated.controller.js";
 
 export const filesControllers = {
   postUpload: postUpload,
-  getFiles: getOriginalFiles,
-  deleteAllFile: deleteOriginalFiles,
-  deleteFile: deleteOriginalFileId,
+  getOriginalFiles: getOriginalFiles,
+  deleteOriginalFiles: deleteOriginalFiles,
+  deleteOriginalFileId: deleteOriginalFileId,
+
+  getTranslatedFiles: getTranslatedFiles,
+  postTranslateFiles: postTranslateFiles,
+  postTranslateFileId: postTranslateFileId,
 };
