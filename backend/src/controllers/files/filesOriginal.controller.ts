@@ -3,7 +3,7 @@ import type { ISubtitleProject } from "../../@types/subtitle.js";
 import { SubtitleProjectModel } from "../../models/SubtitleProject.model.js";
 import {
   deleteAllFilesByType,
-  deleteOriginalById,
+  deleteById,
   getFilesByType, postUploadOriginalByFiles
 } from "../../services/subtitle.service.js";
 
@@ -44,23 +44,19 @@ const deleteOriginalFiles: RequestHandler = async (req, res, next) => {
   }
 };
 
-const deleteOriginalFileId: RequestHandler = async (req, res, next) => {
+const deleteFileId: RequestHandler = async (req, res, next) => {
   try {
-    const deletedFile = await deleteOriginalById(req.params.id as string);
+    const deletedFile = await deleteById(req.params.id as string);
     if (!deletedFile) {
       return res
         .status(404)
         .json({ message: "File not found or already deleted" });
     }
+
     res.status(200).json({ message: "Success delete file" });
   } catch (e) {
     next(e);
   }
 };
 
-export {
-  postUpload,
-  getOriginalFiles,
-  deleteOriginalFiles,
-  deleteOriginalFileId,
-};
+export { postUpload, getOriginalFiles, deleteOriginalFiles, deleteFileId };

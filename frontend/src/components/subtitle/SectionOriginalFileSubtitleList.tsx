@@ -13,14 +13,15 @@ import Loader from "../UI/Loader.tsx";
 
 export default function SectionOriginalFileSubtitleList() {
     //работа с TSQ
+    const type = "original";
     const { data, isPending } = useQuery<IGetFilesResponse[], Error, IGetFilesResponse>({
-        queryKey: ["files"],
-        queryFn: getFilesSubtitle,
+        queryKey: ["files", type],
+        queryFn: () => getFilesSubtitle(type),
     });
     const deleteAll = useMutation({
-        mutationFn: deleteAllFiles,
+        mutationFn: () => deleteAllFiles(type),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["files"] });
+            queryClient.invalidateQueries({ queryKey: ["files", type] });
         },
     });
 
@@ -50,14 +51,14 @@ export default function SectionOriginalFileSubtitleList() {
                 <Button
                     className={classes.button}
                     onClick={() => deleteAll.mutate()}
-                    disabled={data?.filesSubtitle.length === 0 }
+                    disabled={data?.filesSubtitle.length === 0}
                 >
                     Clear All
                 </Button>
                 <Button className={classes.button}>Translate ALL</Button>
             </div>
             <SubtitleList>{filesSubtitle}</SubtitleList>
-            <FilePicker/>
+            <FilePicker />
         </CardContainer>
     );
 }

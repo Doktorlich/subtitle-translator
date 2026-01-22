@@ -15,7 +15,9 @@ const router = Router();
 
 router.get("/files/original", filesControllers.getOriginalFiles);
 router.post("/files/upload", filesControllers.postUpload);
-router.delete("/files/delete", filesControllers.deleteOriginalFiles);
+
+router.delete("/files/original/delete", filesControllers.deleteOriginalFiles);
+router.delete("/files/translated/delete", filesControllers.deleteTranslatedFiles);
 
 router.get("/files/translated", filesControllers.getTranslatedFiles);
 
@@ -24,6 +26,7 @@ router.get("/files/translated", filesControllers.getTranslatedFiles);
 router.post("/files/translate", filesControllers.postTranslateFiles);
 router.post("/files/:id/translate", filesControllers.postTranslateFileId);
 
-router.delete("/files/:id/delete", filesControllers.deleteOriginalFileId);
+router.delete("/files/:id/delete", filesControllers.deleteFileId);
+
 
 export default router;

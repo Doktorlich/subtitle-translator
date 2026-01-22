@@ -10,10 +10,9 @@ export const deleteAllFilesByType = (fileType: "original" | "translated") => {
   return SubtitleProjectModel.deleteMany({ type: fileType });
 };
 
-export const deleteOriginalById = (id: string) => {
+export const deleteById = (id: string) => {
   return SubtitleProjectModel.findOneAndDelete({
     _id: id,
-    type: "original",
   });
 };
 

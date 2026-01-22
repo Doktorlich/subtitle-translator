@@ -1,12 +1,13 @@
 import { QueryClient } from "@tanstack/react-query";
 import type { IGetFilesResponse } from "../models/api-responses.ts";
 import type { ISubtitleProject } from "../models/subtitle.ts";
+import type { TypeFiles } from "../models/typesUI.ts";
 
 export const queryClient = new QueryClient();
 
-export async function getFilesSubtitle(): Promise<IGetFilesResponse[]> {
+export async function getFilesSubtitle(type: TypeFiles): Promise<IGetFilesResponse[]> {
     // await new Promise(resolve => setTimeout(resolve, 2500));
-    const response = await fetch("api/v1/files/original", { method: "GET" });
+    const response = await fetch("api/v1/files/" + type, { method: "GET" });
 
     if (!response.ok) {
         const error = new Error("An error occurred while fetching the files subtitle");
@@ -33,8 +34,8 @@ export async function postUploadFiles(filesSubtitle: ISubtitleProject[]): Promis
     return response;
 }
 
-export async function deleteAllFiles() {
-    const response = await fetch(`/api/v1/files/delete`, { method: "DELETE" });
+export async function deleteAllFiles(type: TypeFiles) {
+    const response = await fetch(`/api/v1/files/${type}/delete`, { method: "DELETE" });
     if (!response.ok) {
         // Старайтесь извлекать описание ошибки из ответа сервера, если оно есть
         const errorData = await response.json().catch(() => ({}));

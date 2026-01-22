@@ -4,7 +4,10 @@
 import type { RequestHandler } from "express";
 import type { ISubtitleProject } from "../../@types/subtitle.js";
 import { SubtitleProjectModel } from "../../models/SubtitleProject.model.js";
-import { getFilesByType } from "../../services/subtitle.service.js";
+import {
+  deleteAllFilesByType,
+    getFilesByType,
+} from "../../services/subtitle.service.js";
 
 const getTranslatedFiles: RequestHandler = async (req, res, next) => {
   try {
@@ -32,6 +35,8 @@ const postTranslateFiles: RequestHandler = async (req, res, next) => {
 const postTranslateFileId: RequestHandler = async (req, res, next) => {
   try {
     const fileData = req.body;
+    
+
     //Данный код понадобится при реализации уже перевода через нейросеть
     // const id = req.params.id;
 
@@ -54,11 +59,33 @@ const postTranslateFileId: RequestHandler = async (req, res, next) => {
       status: "completed",
     });
     await copy.save();
-    res.status(201).json({ message: "success  created  file's copy" ,  id: copy._id });
+    res
+      .status(201)
+      .json({ message: "success  created  file's copy", id: copy._id });
   } catch (err: any) {
     // продумать вывод ошибки ,
     console.log(err);
     return next(err);
   }
 };
-export { getTranslatedFiles, postTranslateFiles, postTranslateFileId };
+
+const deleteTranslatedFiles: RequestHandler = async (req, res, next) => {
+  try {
+    const deletedAllFiles = await deleteAllFilesByType("translated");
+    if (!deletedAllFiles) {
+      return res
+        .status(404)
+        .json({ message: "Files not found or already deleted" });
+    }
+    res.status(200).json({ message: "All files delete successfully" });
+  } catch (e) {
+    next(e);
+  }
+};
+
+export {
+  getTranslatedFiles,
+  postTranslateFiles,
+  postTranslateFileId,
+  deleteTranslatedFiles,
+};

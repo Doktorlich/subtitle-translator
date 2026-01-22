@@ -1,36 +1,37 @@
 import * as React from "react";
 
 export type SubtitleStatus =
-  | "idle"
-  | "loading"
-  | "translating"
-  | "verifying"
-  | "completed"
-  | "error";
+    | "idle"
+    | "loading"
+    | "translating"
+    | "verifying"
+    | "completed"
+    | "error";
 
 export interface ISubtitleLine {
-  id: string;
-  index: string;
-  startTime: number;
-  endTime: number;
-  originalText: string;
-  translatedText?:string;
+    id: string;
+    index: string;
+    startTime: number;
+    endTime: number;
+    originalText: string;
+    translatedText?: string;
 }
 
 export interface ISubtitleProject {
-  id:string;
-  fileName:string;
-  status:SubtitleStatus;
-  lines:ISubtitleLine[];
-  createdAt?: Date;
-  updatedAt?: Date;
+    id: string;
+    fileName: string;
+    status: SubtitleStatus;
+    lines: ISubtitleLine[];
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 export interface SubtitleState {
-  subtitleOriginalList: ISubtitleProject[];
+    subtitleOriginalList: ISubtitleProject[];
 }
 
-export interface SubtitleItemProps extends Pick<ISubtitleProject, 'fileName'> {
+export interface SubtitleItemProps extends Pick<ISubtitleProject, "fileName"> {
     children: React.ReactNode;
 }
 
-export interface OriginalFileActionsProps extends Pick<ISubtitleProject, 'id' | 'status'> {}
+export interface OriginalFileActionsProps extends Pick<ISubtitleProject, "id" | "status"> {}
+export interface TranslatedFileActionsProps extends Pick<ISubtitleProject, "id"> {}

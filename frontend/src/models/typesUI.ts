@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+export type TypeFiles = "original" | "translated";
+
 export interface ButtonType {
     children: ReactNode;
     className?: string;
