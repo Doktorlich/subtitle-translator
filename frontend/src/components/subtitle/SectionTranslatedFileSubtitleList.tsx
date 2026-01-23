@@ -38,7 +38,7 @@ export default function SectionTranslatedFileSubtitleList({}) {
                 key={project.id}
                 fileName={project.fileName} // Передаем имя файла в дочерний компонент
             >
-                <TranslatedFileActions id={project.id} />
+                <TranslatedFileActions id={project.id}/>
             </SubtitleItem>
         ));
     }
