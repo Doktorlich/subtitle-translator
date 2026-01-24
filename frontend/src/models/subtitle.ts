@@ -32,6 +32,9 @@ export interface SubtitleState {
 export interface SubtitleItemProps extends Pick<ISubtitleProject, "fileName"> {
     children: React.ReactNode;
 }
-
+export interface SubtitleFileBlob {
+    fileName: string; // Имя файла (например, "movie_subs_en.vtt")
+    blob: Blob; // Бинарные данные файла
+}
 export interface OriginalFileActionsProps extends Pick<ISubtitleProject, "id" | "status"> {}
 export interface TranslatedFileActionsProps extends Pick<ISubtitleProject, "id"> {}

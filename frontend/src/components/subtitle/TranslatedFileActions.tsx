@@ -8,7 +8,7 @@ import type { TranslatedFileActionsProps } from "../../models/subtitle.ts";
 import { serializeToVtt } from "../../util/serializeToVtt.ts";
 
 import type { IGetFilesResponse } from "../../models/api-responses.ts";
-import { downloadFile } from "../../util/downloadFile.ts";
+import { download } from "../../util/download.ts";
 
 export default function TranslatedFileActions({ id }: TranslatedFileActionsProps) {
     const { mutate, isPending } = useMutation({
@@ -31,7 +31,7 @@ export default function TranslatedFileActions({ id }: TranslatedFileActionsProps
         const [{ fileName }] = file;
         const content = serializeToVtt(file);
         const blob = new Blob([content], { type: "text/vtt" });
-        downloadFile(blob, `${fileName}`);
+        download(blob, `${fileName}`);
     }
 
     return (
