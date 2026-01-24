@@ -54,3 +54,17 @@ export async function deleteFileId(id: string): Promise<void> {
         throw error; // TanStack Query перехватит эту ошибку и перейдет в состояние isError
     }
 }
+
+export async function translateFileById(id: string): Promise<void> {
+    const response = await fetch(`/api/v1/files/${id}/translate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+    });
+    if (!response.ok) {
+        // Старайтесь извлекать описание ошибки из ответа сервера, если оно есть
+        const errorData = await response.json().catch(() => ({}));
+        const error = new Error(errorData.message || "An error occurred while translate the file");
+        console.error(error);
+        throw error; // TanStack Query перехватит эту ошибку и перейдет в состояние isError
+    }
+}

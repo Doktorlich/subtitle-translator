@@ -2,15 +2,15 @@ import type { RequestHandler } from "express";
 import type { ISubtitleProject } from "../../@types/subtitle.js";
 import { SubtitleProjectModel } from "../../models/SubtitleProject.model.js";
 import {
-  deleteAllFilesByType,
-  deleteById,
-  getFilesByType, postUploadOriginalByFiles
+  removeFilesByType,
+  removeProjectById,
+  findFilesByType, bulkCreateOriginals
 } from "../../services/subtitle.service.js";
 
 const postUpload: RequestHandler = async (req, res, next) => {
   try {
     const files = req.body;
-    await postUploadOriginalByFiles(files)
+    await bulkCreateOriginals(files)
     res.status(201).json({ message: "success file upload " });
   } catch (err: any) {
     // продумать вывод ошибки ,
@@ -21,7 +21,7 @@ const postUpload: RequestHandler = async (req, res, next) => {
 
 const getOriginalFiles: RequestHandler = async (req, res, next) => {
   try {
-    const filesSubtitle = await getFilesByType("original");
+    const filesSubtitle = await findFilesByType("original");
     res.status(200).json({ message: "Found all files", filesSubtitle });
   } catch (e) {
     // продумать вывод ошибки ,
@@ -32,7 +32,7 @@ const getOriginalFiles: RequestHandler = async (req, res, next) => {
 
 const deleteOriginalFiles: RequestHandler = async (req, res, next) => {
   try {
-    const deletedAllFiles = await deleteAllFilesByType("original");
+    const deletedAllFiles = await removeFilesByType("original");
     if (!deletedAllFiles) {
       return res
         .status(404)
@@ -46,7 +46,7 @@ const deleteOriginalFiles: RequestHandler = async (req, res, next) => {
 
 const deleteFileId: RequestHandler = async (req, res, next) => {
   try {
-    const deletedFile = await deleteById(req.params.id as string);
+    const deletedFile = await removeProjectById(req.params.id as string);
     if (!deletedFile) {
       return res
         .status(404)

@@ -2,16 +2,19 @@
 // translateAi.controller.ts
 
 import type { RequestHandler } from "express";
-import type { ISubtitleProject } from "../../@types/subtitle.js";
 import { SubtitleProjectModel } from "../../models/SubtitleProject.model.js";
 import {
-  deleteAllFilesByType,
-    getFilesByType,
+  removeFilesByType,
+  findFilesByType,
+  translateProjectById,
 } from "../../services/subtitle.service.js";
+import { translateAiQuery } from "../../services/mistral/mistral-client.js";
+import type { ISubtitleLine, ISubtitleProject } from "../../@types/subtitle.js";
+import type { IAITranslationResponse } from "../../@types/ai.js";
 
 const getTranslatedFiles: RequestHandler = async (req, res, next) => {
   try {
-    const filesSubtitle = await getFilesByType("translated");
+    const filesSubtitle = await findFilesByType("translated");
     res.status(200).json({ message: "Found all files", filesSubtitle });
   } catch (e) {
     // продумать вывод ошибки ,
@@ -34,44 +37,35 @@ const postTranslateFiles: RequestHandler = async (req, res, next) => {
 
 const postTranslateFileId: RequestHandler = async (req, res, next) => {
   try {
-    const fileData = req.body;
-    
-
-    //Данный код понадобится при реализации уже перевода через нейросеть
-    // const id = req.params.id;
-
-    // if (!id || typeof id !== "string") {
-    //   return res.status(400).json({ message: "Invalid or missing ID" });
-    // }
-
-    // const original = await SubtitleProjectModel.findOne({
-    //   _id: id,
-    //   type: "original",
-    // });
-    // if (!original) {
-    //   return res.status(404).json({ message: "Original file not found" });
-    // }
-    // временное тестовое решение
-    const copy = new SubtitleProjectModel({
-      ...fileData[0],
-      _id: crypto.randomUUID(),
-      type: "translated",
-      status: "completed",
-    });
-    await copy.save();
-    res
-      .status(201)
-      .json({ message: "success  created  file's copy", id: copy._id });
+    const id = req.params.id;
+    if (!id || typeof id !== "string") {
+      return res.status(400).json({ message: "Invalid or missing ID" });
+    }
+    await translateProjectById(id);
+    res.status(201).json({ message: "success  created  file's copy" });
   } catch (err: any) {
-    // продумать вывод ошибки ,
-    console.log(err);
-    return next(err);
+    // 5. Расширенная обработка ошибок
+    console.error("--- AI Translation Error ---");
+    // Если ошибка от самого Mistral (например, лимиты или ключ)
+    if (err.name === "MistralError") {
+      return res
+        .status(502)
+        .json({ error: "Mistral API unreachable", details: err.message });
+    }
+    // Если ошибка парсинга JSON (нейросеть "сломала" формат)
+    if (err instanceof SyntaxError) {
+      return res
+        .status(422)
+        .json({ error: "AI returned invalid JSON structure" });
+    }
+    // Остальные ошибки (БД, сеть и т.д.)
+    next(err);
   }
 };
 
 const deleteTranslatedFiles: RequestHandler = async (req, res, next) => {
   try {
-    const deletedAllFiles = await deleteAllFilesByType("translated");
+    const deletedAllFiles = await removeFilesByType("translated");
     if (!deletedAllFiles) {
       return res
         .status(404)
