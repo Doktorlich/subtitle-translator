@@ -20,7 +20,7 @@ export default function OriginalFileActions({
     const { mutate: mutateTrans, isPending: isPendingTrans } = useMutation({
         mutationFn: translateFileById,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["files"] });
+            queryClient.invalidateQueries({ queryKey: ["files", statusTranslate] });
         },
     });
 
@@ -38,7 +38,7 @@ export default function OriginalFileActions({
                     DEL
                 </Button>
             )}
-            {isPendingTrans ? (
+            {statusTranslate === "translating" || isPendingTrans ? (
                 <Loader key={id} />
             ) : (
                 <Button

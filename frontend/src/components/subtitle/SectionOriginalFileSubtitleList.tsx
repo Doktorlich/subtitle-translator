@@ -2,9 +2,14 @@ import SubtitleList from "./SubtitleList.tsx";
 import SubtitleItem from "./SubtitleItem.tsx";
 import OriginalFileActions from "./OriginalFileActions.tsx";
 import type { ISubtitleProject } from "../../models/subtitle.ts";
-import { deleteAllFiles, getFilesSubtitle, queryClient } from "../../services/client.ts";
+import {
+    deleteAllFiles,
+    getFilesSubtitle,
+    queryClient,
+    translateFiles,
+} from "../../services/client.ts";
 import type { IGetFilesResponse } from "../../models/api-responses.ts";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useIsMutating, useMutation, useQuery } from "@tanstack/react-query";
 import classes from "../../pages/HomePage.module.css";
 import Button from "../UI/ButtonItem.tsx";
 import FilePicker from "../UI/FilePicker.tsx";
@@ -14,17 +19,25 @@ import Loader from "../UI/Loader.tsx";
 export default function SectionOriginalFileSubtitleList() {
     //работа с TSQ
     const type = "original";
-    const { data, isPending } = useQuery<IGetFilesResponse[], Error, IGetFilesResponse>({
+    // const isAnyMutating = useIsMutating();
+    const isTranslating = useIsMutating({ mutationKey: ["translate"] });
+    const query = useQuery<IGetFilesResponse, Error, IGetFilesResponse>({
         queryKey: ["files", type],
         queryFn: () => getFilesSubtitle(type),
     });
+    const { data, isPending } = query;
     const deleteAll = useMutation({
         mutationFn: () => deleteAllFiles(type),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["files", type] });
         },
     });
-
+    const translateAll = useMutation({
+        mutationFn: translateFiles,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["files", type] });
+        },
+    });
     let filesSubtitle;
     if (isPending) {
         filesSubtitle = (
@@ -44,7 +57,7 @@ export default function SectionOriginalFileSubtitleList() {
     if (data?.filesSubtitle.length === 0) {
         filesSubtitle = <div className={classes["loader-wrapper"]}>nothing</div>;
     }
-
+    let isDisabled = translateAll.isPending || data?.filesSubtitle.length === 0;
     return (
         <CardContainer title={"Storage original file"}>
             <div className={classes["button-list"]}>
@@ -55,7 +68,14 @@ export default function SectionOriginalFileSubtitleList() {
                 >
                     Clear All
                 </Button>
-                <Button className={classes.button}>Translate ALL</Button>
+                <Button
+                    className={classes.button}
+                    onClick={translateAll.mutate}
+                    disabled={isDisabled}
+                >
+                    {isTranslating ? <Loader size={25} /> : "Translate ALL"}
+                    {/*Translate ALL*/}
+                </Button>
             </div>
             <SubtitleList>{filesSubtitle}</SubtitleList>
             <FilePicker />

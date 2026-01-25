@@ -5,7 +5,7 @@ import type { TypeFiles } from "../models/typesUI.ts";
 
 export const queryClient = new QueryClient();
 
-export async function getFilesSubtitle(type: TypeFiles): Promise<IGetFilesResponse[]> {
+export async function getFilesSubtitle(type: TypeFiles): Promise<IGetFilesResponse> {
     // await new Promise(resolve => setTimeout(resolve, 2500));
     const response = await fetch("api/v1/files/" + type, { method: "GET" });
 
@@ -57,6 +57,19 @@ export async function deleteFileId(id: string): Promise<void> {
 
 export async function translateFileById(id: string): Promise<void> {
     const response = await fetch(`/api/v1/files/${id}/translate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+    });
+    if (!response.ok) {
+        // Старайтесь извлекать описание ошибки из ответа сервера, если оно есть
+        const errorData = await response.json().catch(() => ({}));
+        const error = new Error(errorData.message || "An error occurred while translate the file");
+        console.error(error);
+        throw error; // TanStack Query перехватит эту ошибку и перейдет в состояние isError
+    }
+}
+export async function translateFiles(): Promise<void> {
+    const response = await fetch(`/api/v1/files/translate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
     });
