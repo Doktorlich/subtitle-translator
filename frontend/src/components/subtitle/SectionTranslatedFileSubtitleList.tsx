@@ -13,9 +13,10 @@ import { serializeToVtt } from "../../util/serializeToVtt.ts";
 import { downloadArchiveZip } from "../../util/download.ts";
 
 export default function SectionTranslatedFileSubtitleList({}) {
-    const { data, isPending } = useQuery<IGetFilesResponse[], Error, IGetFilesResponse>({
+    const { data, isPending } = useQuery<IGetFilesResponse, Error, IGetFilesResponse>({
         queryKey: ["files", "translated"],
         queryFn: () => getFilesSubtitle("translated"),
+
     });
     const deleteAll = useMutation({
         mutationFn: () => deleteAllFiles("translated"),

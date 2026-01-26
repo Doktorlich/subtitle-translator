@@ -9,6 +9,11 @@
 	padding-bottom: 50px;
 
 }
+.center{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .button{
 	border: 1px solid rgba(63,63,61,0.64);
 	border-radius: 5px;

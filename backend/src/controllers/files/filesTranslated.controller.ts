@@ -21,15 +21,21 @@ const getTranslatedFiles: RequestHandler = async (req, res, next) => {
 
 const postTranslateFiles: RequestHandler = async (req, res, next) => {
     try {
+        await SubtitleProjectModel.updateMany({ type: "original" }, { status: "translating" });
+
         const original = await SubtitleProjectModel.find({ type: "original" });
         if (!original) {
             throw new Error("Original file not found");
         }
         const limit = pLimit(5);
-        const translationPromises = original.map(file => {
-            return limit(() => translateProject(file._id));
-        });
-        await Promise.all(translationPromises);
+
+        (async () => {
+            const translationPromises = original.map(file =>
+                limit(() => translateProject(file._id)),
+            );
+            await Promise.all(translationPromises);
+        })().catch(console.error);
+
         res.status(200).json({ message: "Mass transfer completed" });
     } catch (err: any) {
         // продумать вывод ошибки ,
@@ -44,8 +50,10 @@ const postTranslateFileId: RequestHandler = async (req, res, next) => {
         if (!id || typeof id !== "string") {
             return res.status(400).json({ message: "Invalid or missing ID" });
         }
-
-        await translateProject(id);
+        await SubtitleProjectModel.findByIdAndUpdate(id, { status: "translating" });
+        (async () => {
+            await translateProject(id);
+        })().catch(console.error);
         res.status(201).json({ message: "success  created  file's copy" });
     } catch (err: any) {
         // 5. Расширенная обработка ошибок

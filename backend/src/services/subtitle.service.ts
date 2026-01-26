@@ -32,13 +32,13 @@ export const bulkCreateOriginals = (files: ISubtitleProject[]) => {
 };
 
 export const translateProject = async (id: string) => {
-    await SubtitleProjectModel.findByIdAndUpdate(
-        {
-            _id: id,
-            type: "original",
-        },
-        { status: "translating" },
-    );
+    // await SubtitleProjectModel.findByIdAndUpdate(
+    //     {
+    //         _id: id,
+    //         type: "original",
+    //     },
+    //     { status: "translating" },
+    // );
     const original = await SubtitleProjectModel.findOne({
         _id: id,
         type: "original",
