@@ -22,7 +22,7 @@ export async function readFiles(event: ChangeEvent<HTMLInputElement>) {
         const content = await file.text();
 
         // Теперь у нас есть content в виде строки, как и раньше.
-        // Передаем его в твой парсер.
+        // Передаем его в  парсер.
         let parseFileList = parserVTT(content);
 
         // Мы возвращаем объект, который потом полетит в RTK.
@@ -31,19 +31,19 @@ export async function readFiles(event: ChangeEvent<HTMLInputElement>) {
           id: crypto.randomUUID(), // ID проекта
           fileName: file.name, // Имя файла
           status: "idle" as SubtitleStatus, // Начальный статус
-          lines: parseFileList, // Твой массив ISubtitleLine[]
+          lines: parseFileList, //  массив ISubtitleLine[]
         };
       }),
     );
 
     // В этой точке переменная 'projects' — это массив готовых объектов.
-    // Здесь ты делаешь один dispatch в RTK:
 
     console.log("Все файлы прочитаны асинхронно:", projects);
     return projects;
   } catch (error) {
     // Если хотя бы один файл не прочитается (например, ошибка диска),
     // мы попадем сюда.
+
     console.error("Ошибка при асинхронном чтении файлов:", error);
   }
 }

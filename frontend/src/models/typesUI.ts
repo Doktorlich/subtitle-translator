@@ -6,7 +6,7 @@ export interface ButtonType {
     children: ReactNode;
     className?: string;
     onClick?: () => void;
-    disabled?: boolean
+    disabled?: boolean;
 }
 
 export interface CardContainer {
@@ -27,6 +27,7 @@ export interface SubtitleItemProps {
 export interface SelectorItemProps {
     id: string;
     label: string;
-    email: string;
-    type: string;
+    route: string;
+    description:string;
+    modelId: string;
 }

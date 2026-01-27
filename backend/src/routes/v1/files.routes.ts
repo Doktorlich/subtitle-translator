@@ -13,20 +13,20 @@ const router = Router();
 //   res.send("You visit the upload route");
 // });
 
-router.get("/files/original", filesControllers.getOriginalFiles);
-router.post("/files/upload", filesControllers.postUpload);
+router.get("/original", filesControllers.getOriginalFiles);
+router.post("/upload", filesControllers.postUpload);
 
-router.delete("/files/original/delete", filesControllers.deleteOriginalFiles);
-router.delete("/files/translated/delete", filesControllers.deleteTranslatedFiles);
+router.delete("/original/delete", filesControllers.deleteOriginalFiles);
+router.delete("/translated/delete", filesControllers.deleteTranslatedFiles);
 
-router.get("/files/translated", filesControllers.getTranslatedFiles);
+router.get("/translated", filesControllers.getTranslatedFiles);
 
 //перевод сразу всех файлов, думаю тут будет перевод сразу несколько файлов,
 // там условно по 5 парраллельных переводов, просто если переводить сразу все то будет потреблять слишком много мощностей
-router.post("/files/translate", filesControllers.postTranslateFiles);
-router.post("/files/:id/translate", filesControllers.postTranslateFileId);
+router.post("/translate", filesControllers.postTranslateFiles);
+router.post("/:id/translate", filesControllers.postTranslateFileId);
 
-router.delete("/files/:id/delete", filesControllers.deleteFileId);
+router.delete("/:id/delete", filesControllers.deleteFileId);
 
 
 export default router;

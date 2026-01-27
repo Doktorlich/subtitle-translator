@@ -1,24 +1,29 @@
 import {
-  deleteFileId,
-  deleteOriginalFiles,
-  getOriginalFiles,
-  postUpload,
+    deleteFileId,
+    deleteOriginalFiles,
+    getOriginalFiles,
+    postUpload,
 } from "./files/filesOriginal.controller.js";
 import {
-  deleteTranslatedFiles,
-  getTranslatedFiles,
-  postTranslateFileId,
-  postTranslateFiles
+    deleteTranslatedFiles,
+    getTranslatedFiles,
+    postTranslateFileId,
+    postTranslateFiles,
 } from "./files/filesTranslated.controller.js";
+import { getAiModels, postSelectedAiModel } from "./ai/ai.controller.js";
 
 export const filesControllers = {
-  postUpload: postUpload,
-  getOriginalFiles: getOriginalFiles,
-  deleteOriginalFiles: deleteOriginalFiles,
-  deleteFileId: deleteFileId,
+    postUpload: postUpload,
+    getOriginalFiles: getOriginalFiles,
+    deleteOriginalFiles: deleteOriginalFiles,
+    deleteFileId: deleteFileId,
 
-  getTranslatedFiles: getTranslatedFiles,
-  postTranslateFiles: postTranslateFiles,
-  postTranslateFileId: postTranslateFileId,
-  deleteTranslatedFiles: deleteTranslatedFiles,
+    getTranslatedFiles: getTranslatedFiles,
+    postTranslateFiles: postTranslateFiles,
+    postTranslateFileId: postTranslateFileId,
+    deleteTranslatedFiles: deleteTranslatedFiles,
+};
+export const aiControllers = {
+    getAiModel: getAiModels,
+    postSelectedAiModel: postSelectedAiModel,
 };

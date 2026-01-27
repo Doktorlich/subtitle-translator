@@ -3,6 +3,8 @@ import { SubtitleProjectModel } from "../models/SubtitleProject.model.js";
 import type { ISubtitleLine, ISubtitleProject } from "../@types/subtitle.js";
 import { translateAiQuery } from "./mistral/mistral-client.js";
 import type { IAITranslationResponse } from "../@types/ai.js";
+import { translateAiQueryOR } from "./openrouter/openrouter-client.js";
+import { SelectedModel } from "../models/SelectedAiModel.model.js";
 
 export const findFilesByType = (fileType: "original" | "translated") => {
     return SubtitleProjectModel.find({ type: fileType })
@@ -49,7 +51,17 @@ export const translateProject = async (id: string) => {
     }
     const originalData = original.toObject() as ISubtitleProject;
 
-    const rawResult = await translateAiQuery(originalData);
+    let rawResult;
+    const modelAi = await SelectedModel.find();
+// переделать код работы с множеством клиентов AI не только через моледи
+    if (modelAi[0].modelId === "mistral-small-latest") {
+        rawResult = await translateAiQuery(originalData);
+    } else {
+        rawResult = await translateAiQueryOR(originalData, modelAi[0].modelId);
+    }
+
+    // const rawResult = await translateAiQuery(originalData);
+    // const rawResult = await translateAiQueryOR(originalData);
     if (!rawResult) throw new Error("AI_EMPTY_RESPONSE");
 
     if (typeof rawResult !== "string") {

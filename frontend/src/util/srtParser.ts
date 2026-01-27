@@ -8,10 +8,12 @@ function convertTimeSubToMs(time: string) {
 }
 
 export const parserVTT = (fileContent: string): ISubtitleLine[] => {
+
   const splitFileSub = fileContent
-    // .replace(/\r\n/g, '\n')
-    .trim()
-    .split(/\n\s*\n/);
+      .replace(/\r\n|\r/g, "\n")
+      .replace(/\n/g, "\r\n")
+      .trim()
+      .split(/\n\s*\n/);
 
   const lineList = splitFileSub
     .filter((sub) => sub !== "WEBVTT\r")

@@ -38,3 +38,13 @@ export interface SubtitleFileBlob {
 }
 export interface OriginalFileActionsProps extends Pick<ISubtitleProject, "id" | "status"> {}
 export interface TranslatedFileActionsProps extends Pick<ISubtitleProject, "id"> {}
+
+export interface IModelAi {
+    id: string;
+    name: string;
+    provider: string;
+    route: string;
+    modelId: string;
+    isFree: boolean;
+    description:string;
+}
