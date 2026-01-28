@@ -12,14 +12,12 @@ const SelectedModelSchema = new Schema({
         required: true,
         unique: true, // ⬅️ Гарантируем только одну запись на ключ
     },
-
+    modelName: { type: String, required: true },
     // Значение может быть любым типом (строка, число, объект, массив)
     modelId: {
         type: String,
         required: true,
     },
-
-
 });
 
 export const SelectedModel = model("SelectedModel", SelectedModelSchema);

@@ -1,5 +1,5 @@
 import { QueryClient } from "@tanstack/react-query";
-import type { IGetFilesResponse, IGetModelAiResponse } from "../models/api-responses.ts";
+import type { IGetFilesResponse, ISelectModelAiResponse } from "../models/api-responses.ts";
 import type { ISubtitleProject } from "../models/subtitle.ts";
 import type { TypeFiles } from "../models/typesUI.ts";
 
@@ -95,7 +95,7 @@ export async function translateFiles(): Promise<void> {
     }
 }
 
-export async function getModelList(): Promise<IGetModelAiResponse> {
+export async function getModelList(): Promise<ISelectModelAiResponse> {
     const response = await fetch("/api/v1/ai/models-ai", { method: "GET" });
     if (!response.ok) {
         // Старайтесь извлекать описание ошибки из ответа сервера, если оно есть
@@ -108,13 +108,11 @@ export async function getModelList(): Promise<IGetModelAiResponse> {
     }
     return await response.json();
 }
-export async function selectedModel( modelId: string) {
-    console.log(modelId);
-    console.log();
+export async function selectedModel(model: { modelId: string; modelName: string }) {
     const response = await fetch("/api/v1/ai/select-model", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ modelId: modelId }),
+        body: JSON.stringify({ modelId: model.modelId, modelName: model.modelName }),
     });
 
     if (!response.ok) {
@@ -124,5 +122,17 @@ export async function selectedModel( modelId: string) {
         console.error(error);
         throw error; // TanStack Query перехватит эту ошибку и перейдет в состояние isError
     }
-    return response;
+
+}
+
+export async function getDefaultAiModel() {
+    const response = await fetch("/api/v1/ai/info-model", { method: "GET" });
+    if (!response.ok) {
+        // Старайтесь извлекать описание ошибки из ответа сервера, если оно есть
+        const errorData = await response.json().catch(() => ({}));
+        const error = new Error(errorData.message || "An error occurred while obtaining model");
+        console.error(error);
+        throw error; // TanStack Query перехватит эту ошибку и перейдет в состояние isError
+    }
+    return await response.json();
 }

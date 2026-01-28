@@ -11,16 +11,14 @@ const getAiModels: RequestHandler = async (req, res, next) => {
 };
 
 const postSelectedAiModel: RequestHandler = async (req, res, next) => {
-        const { modelId } = req.body;
-        console.log("*******************************************");
-        console.log("modelId", modelId);
-        console.log("*******************************************");
+    const { modelName, modelId } = req.body;
+    console.log("*******************************************");
+    console.log(modelName, modelId);
+    console.log("*******************************************");
     try {
-
-
         const aiModel = await SelectedModel.findOneAndUpdate(
             { key: "selectedAIModel" },
-            { modelId: modelId },
+            { modelName: modelName, modelId: modelId },
             {
                 upsert: true, // Создать если не найдено
                 new: true, // Вернуть обновлённый документ
@@ -31,5 +29,13 @@ const postSelectedAiModel: RequestHandler = async (req, res, next) => {
         console.log(e);
     }
 };
-// const getDefaultAiModel: RequestHandler = async (req, res, next) => {}
-export { getAiModels, postSelectedAiModel };
+const getDefaultAiModel: RequestHandler = async (req, res, next) => {
+    try {
+        const modelAi = await SelectedModel.find();
+        res.status(200).json({ message: "The model has been successfully obtained", modelAi});
+    } catch (e) {
+        console.log("",e);
+        res.status(500).json({message:"Ошибка при загрезке modelAi"})
+    }
+};
+export { getAiModels, postSelectedAiModel, getDefaultAiModel };

@@ -27,7 +27,7 @@ const postTranslateFiles: RequestHandler = async (req, res, next) => {
         if (!original) {
             throw new Error("Original file not found");
         }
-        const limit = pLimit(5);
+        const limit = pLimit(4);
 
         (async () => {
             const translationPromises = original.map(file =>

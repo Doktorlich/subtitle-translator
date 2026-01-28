@@ -60,15 +60,15 @@ export const AI_MODELS = [
         isFree: true,
         description: "Популярная модель от Meta с хорошим пониманием инструкций.",
     },
-    {
-        id: "llama3-3b", //valid
-        name: "Llama 3.2 3B",
-        provider: "OpenRouter",
-        // route: "/api/translate/llama",
-        modelId: "meta-llama/llama-3.2-3b-instruct",
-        isFree: true,
-        description: "Ультра-легкая модель для мгновенных ответов.",
-    },
+    // {
+    //     id: "llama3-3b", //invalid
+    //     name: "Llama 3.2 3B",
+    //     provider: "OpenRouter",
+    //     // route: "/api/translate/llama",
+    //     modelId: "meta-llama/llama-3.2-3b-instruct",
+    //     isFree: true,
+    //     description: "Ультра-легкая модель для мгновенных ответов.",
+    // },
     // {
     //     id: "zephyr-7b", //invalid
     //     name: "Zephyr 7B Beta",

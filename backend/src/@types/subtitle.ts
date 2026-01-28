@@ -27,3 +27,4 @@ export interface ISubtitleProject {
 export interface SubtitleState {
   subtitleOriginalList: ISubtitleProject[];
 }
+
