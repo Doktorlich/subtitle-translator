@@ -48,3 +48,5 @@ export interface IModelAi {
     isFree: boolean;
     description:string;
 }
+
+export type SubtitleFormat = "vtt" | "srt";
