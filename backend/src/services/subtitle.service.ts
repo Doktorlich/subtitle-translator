@@ -1,17 +1,19 @@
 // src/services/subtitle.service.ts
 import { SubtitleProjectModel } from "../models/SubtitleProject.model.js";
 import type { ISubtitleLine, ISubtitleProject } from "../@types/subtitle.js";
-import { translateAiQuery } from "./mistral/mistral-client.js";
+
 import type { IAITranslationResponse } from "../@types/ai.js";
-import { translateAiQueryOR } from "./openrouter/openrouter-client.js";
+
 import { SelectedModel } from "../models/SelectedAiModel.model.js";
+import { searchAndSelectModelAi } from "./searchModelAi.service.js";
+
 
 export const findFilesByType = (fileType: "original" | "translated") => {
     return SubtitleProjectModel.find({ type: fileType })
         .sort({ fileName: "asc" })
         .collation({ locale: "en_US", numericOrdering: true });
 };
-// здесь же могут быть другие функции, например, createProject, deleteProject и т.д.
+
 export const removeFilesByType = (fileType: "original" | "translated") => {
     return SubtitleProjectModel.deleteMany({ type: fileType });
 };
@@ -34,34 +36,22 @@ export const bulkCreateOriginals = (files: ISubtitleProject[]) => {
 };
 
 export const translateProject = async (id: string) => {
-    // await SubtitleProjectModel.findByIdAndUpdate(
-    //     {
-    //         _id: id,
-    //         type: "original",
-    //     },
-    //     { status: "translating" },
-    // );
     const original = await SubtitleProjectModel.findOne({
         _id: id,
         type: "original",
     });
-
     if (!original) {
         throw new Error("Original file not found");
     }
     const originalData = original.toObject() as ISubtitleProject;
 
-    let rawResult;
     const modelAi = await SelectedModel.find();
-// переделать код работы с множеством клиентов AI не только через моледи
-    if (modelAi[0].modelId === "mistral-small-latest") {
-        rawResult = await translateAiQuery(originalData);
-    } else {
-        rawResult = await translateAiQueryOR(originalData, modelAi[0].modelId);
+    if (!modelAi) {
+        throw new Error("The Model ai selected not found");
     }
 
-    // const rawResult = await translateAiQuery(originalData);
-    // const rawResult = await translateAiQueryOR(originalData);
+    const rawResult = await searchAndSelectModelAi(modelAi, originalData);
+
     if (!rawResult) throw new Error("AI_EMPTY_RESPONSE");
 
     if (typeof rawResult !== "string") {
@@ -93,3 +83,18 @@ export const translateProject = async (id: string) => {
     );
     await copy.save();
 };
+
+export function selectedAiModel(modelName: string, modelId: string, provider: string) {
+    return SelectedModel.findOneAndUpdate(
+        { key: "selectedAIModel" },
+        { modelName: modelName, modelId: modelId, provider: provider },
+        {
+            upsert: true, // Создать если не найдено
+            new: true, // Вернуть обновлённый документ
+        },
+    );
+}
+
+export async function loadSelectedAiModel() {
+    return SelectedModel.find();
+}

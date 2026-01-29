@@ -19,13 +19,13 @@ export default function SelectorTrigger() {
     });
 
     useEffect(() => {
-        if (data?.modelAi?.[0]?.modelName) {
-            dispatch(chooseItem(data.modelAi[0].modelName));
+        if (data?.aiModel?.[0]?.modelName) {
+            dispatch(chooseItem(data.aiModel[0].modelName));
         }
     }, [data, dispatch]);
     const isActive = useAppSelector(state => state.selector.isActive);
 
-    console.log("getDefaultAiModel", data?.modelAi[0]);
+    console.log("getDefaultAiModel", data?.aiModel[0]);
     return (
         <div className={classes["selector-trigger"]} onClick={handleClickSelector}>
             <p>{selectorTitle}</p>

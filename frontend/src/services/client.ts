@@ -108,11 +108,15 @@ export async function getModelList(): Promise<ISelectModelAiResponse> {
     }
     return await response.json();
 }
-export async function selectedModel(model: { modelId: string; modelName: string }) {
+export async function selectedModel(model: { modelId: string; modelName: string; provider:string }) {
     const response = await fetch("/api/v1/ai/select-model", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ modelId: model.modelId, modelName: model.modelName }),
+        body: JSON.stringify({
+            modelId: model.modelId,
+            modelName: model.modelName,
+            provider: model.provider,
+        }),
     });
 
     if (!response.ok) {
@@ -122,11 +126,11 @@ export async function selectedModel(model: { modelId: string; modelName: string 
         console.error(error);
         throw error; // TanStack Query перехватит эту ошибку и перейдет в состояние isError
     }
-
 }
 
 export async function getDefaultAiModel() {
     const response = await fetch("/api/v1/ai/info-model", { method: "GET" });
+    console.log(response);
     if (!response.ok) {
         // Старайтесь извлекать описание ошибки из ответа сервера, если оно есть
         const errorData = await response.json().catch(() => ({}));

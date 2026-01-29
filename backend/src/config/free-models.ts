@@ -28,7 +28,7 @@ export const AI_MODELS = [
         id: "mistral-7b", //valid
         name: "Mistral 7B Instruct",
         provider: "OpenRouter",
-        // route: "/api/translate/mistral",
+        source: "OpenRouter",
         modelId: "mistralai/mistral-7b-instruct",
         isFree: true,
         description: "Легкая и быстрая модель, отлично подходит для простых задач.",
@@ -164,7 +164,7 @@ export const AI_MODELS = [
     {
         id: "mistral-direct-small", //valid
         name: "Mistral Small (Direct)",
-        provider: "Mistral AI",
+        provider: "MistralAI",
         // route: "/api/translate/mistral-direct",
         modelId: "mistral-small-latest",
         isFree: false,
@@ -173,7 +173,7 @@ export const AI_MODELS = [
     {
         id: "Upstage: Solar Pro 3 (free)", //valid
         name: "Upstage: Solar Pro 3 (free)",
-        provider: "Solar Pro 3",
+        provider: "OpenRouter",
         // route: "/api/translate/mistral-direct",
         modelId: "upstage/solar-pro-3:free",
         isFree: false,
@@ -182,7 +182,7 @@ export const AI_MODELS = [
     {
         id: "TNG: DeepSeek R1T Chimera (free)", //valid
         name: "DeepSeek R1T Chimera",
-        provider: "TNG: DeepSeek R1T Chimera (free)",
+        provider: "OpenRouter",
         modelId: "tngtech/deepseek-r1t-chimera:free",
         isFree: true,
         description: "Бесплатная модель от DS",
@@ -190,13 +190,12 @@ export const AI_MODELS = [
     {
         id: "TNG: DeepSeek R1T2 Chimera (free)", //valid
         name: "DeepSeek R1T2 Chimera",
-        provider: "TNG: DeepSeek R1T2 Chimera (free)",
+        provider: "OpenRouter",
         // route: "",
         modelId: "tngtech/deepseek-r1t2-chimera:free",
         isFree: true,
         description: "Бесплатная модель от DS",
     },
-
 ];
 
 // {

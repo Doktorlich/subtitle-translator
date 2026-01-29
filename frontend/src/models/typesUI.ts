@@ -25,9 +25,10 @@ export interface SubtitleItemProps {
 }
 
 export interface SelectorItemProps {
-    id: string;
-    label: string;
-    route: string;
-    description:string;
-    modelId: string;
+    id: string,
+    label: string,
+    route: string,
+    description: string,
+    modelId: string,
+    provider: string
 }

@@ -14,8 +14,9 @@ export interface TypeModelAi {
     key: "selectedAIModel";
     modelName: string;
     modelId: string;
+    provider:string;
 }
 export interface IGetModelAiResponse {
     message: string;
-    modelAi: TypeModelAi[];
+    aiModel: TypeModelAi[];
 }

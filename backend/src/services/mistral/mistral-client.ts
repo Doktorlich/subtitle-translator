@@ -32,15 +32,16 @@ const systemPrompt = `
 // `;
 
 export const translateAiQuery = async (original: ISubtitleProject) => {
-  const response: ChatCompletionResponse = await client.chat.complete({
-    model: "mistral-small-latest",
-    messages: [
-      { role: "system", content: systemPrompt },
-      { role: "user", content: JSON.stringify(original) },
-    ],
-    responseFormat: { type: "json_object" },
-    temperature: 0,
-  });
-  console.log(response);
-  return response.choices?.[0]?.message?.content;
+
+    const response: ChatCompletionResponse = await client.chat.complete({
+        model: "mistral-small-latest",
+        messages: [
+            { role: "system", content: systemPrompt },
+            { role: "user", content: JSON.stringify(original) },
+        ],
+        responseFormat: { type: "json_object" },
+        temperature: 0,
+    });
+    console.log(response);
+    return response.choices?.[0]?.message?.content;
 };

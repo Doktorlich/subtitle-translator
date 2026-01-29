@@ -8,6 +8,7 @@ import { queryClient, selectedModel } from "../../services/client.ts";
 export default function SelectorItem({
     modelId,
     label: modelName,
+    provider,
     description,
 }: SelectorItemProps) {
     const dispatch = useAppDispatch();
@@ -23,7 +24,7 @@ export default function SelectorItem({
     function handleClickItem() {
         dispatch(chooseItem(modelName));
         dispatch(toggleSelectorItem());
-        mutate({ modelId: modelId, modelName: modelName });
+        mutate({ modelId: modelId, modelName: modelName, provider: provider });
     }
     return (
         <li className={classes.item} onClick={handleClickItem}>

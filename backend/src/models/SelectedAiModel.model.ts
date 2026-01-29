@@ -13,6 +13,7 @@ const SelectedModelSchema = new Schema({
         unique: true, // ⬅️ Гарантируем только одну запись на ключ
     },
     modelName: { type: String, required: true },
+    provider:{type: String, required: true },
     // Значение может быть любым типом (строка, число, объект, массив)
     modelId: {
         type: String,

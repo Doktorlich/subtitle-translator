@@ -6,7 +6,8 @@ export interface IAITranslationResponse {
 }
 
 export interface TypeModelAi {
-    key: "selectedAIModel";
+    key: string;
     modelName: string;
     modelId: string;
+    provider:string;
 }

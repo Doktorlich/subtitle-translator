@@ -20,6 +20,7 @@ export default function SelectorList() {
                     label={model.name}
                     description={model.description}
                     route={""}
+                    provider = {model.provider}
                     modelId={model.modelId}
                 />
             ))}
