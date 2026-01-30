@@ -54,9 +54,9 @@ export default function SectionTranslatedFileSubtitleList({}) {
         }
         const fileList:SubtitleFileBlob[] | undefined = data?.filesSubtitle.map(file => {
             const content = serializeToVtt([file]);
-            const blob = new Blob([content], { type: "text/vtt" });
-            const fileNameSplit = file.fileName.split(".vtt");
-            const fileName = fileNameSplit[0] + "__translated.vtt";
+            const blob = new Blob([content], { type: "text/srt" });
+            const fileNameSplit = file.fileName.split(".srt");
+            const fileName = fileNameSplit[0] + "__translated.srt";
             return { fileName: fileName, blob: blob };
         });
         downloadArchiveZip(fileList)

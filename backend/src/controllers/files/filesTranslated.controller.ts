@@ -24,12 +24,13 @@ const postTranslateFiles = catchAsync(async (req, res, next) => {
         return next(new AppError("No original files available for translation", 404));
     }
 
-    const limit = pLimit(4);
+    const limit = pLimit(Number(process.env.PER_LIMIT));
 
     (async () => {
-        const translationPromises = original.map(file =>
+        const translationPromises = original.map((file,index) =>
             limit(async () => {
                 try {
+                    await new Promise(resolve => setTimeout(resolve, index * 1100));
                     await translateProject(file._id);
                 } catch (err: any) {
                     console.error(`[Task Error] File ${file._id} failed:`, err.message);

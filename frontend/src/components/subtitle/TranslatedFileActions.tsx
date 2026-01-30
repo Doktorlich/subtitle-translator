@@ -17,7 +17,7 @@ export default function TranslatedFileActions({ id }: TranslatedFileActionsProps
             queryClient.invalidateQueries({ queryKey: ["files"] });
         },
     });
-    const { data } = useQuery<IGetFilesResponse[], Error, IGetFilesResponse>({
+    const { data } = useQuery<IGetFilesResponse, Error, IGetFilesResponse>({
         queryKey: ["files", "translated"],
         queryFn: () => getFilesSubtitle("translated"),
         enabled: false,
@@ -30,7 +30,7 @@ export default function TranslatedFileActions({ id }: TranslatedFileActionsProps
         }
         const [{ fileName }] = file;
         const content = serializeToVtt(file);
-        const blob = new Blob([content], { type: "text/vtt" });
+        const blob = new Blob([content], { type: "text/srt" });
         download(blob, `${fileName}`);
     }
 

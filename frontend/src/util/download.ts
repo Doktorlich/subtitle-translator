@@ -13,7 +13,7 @@ export function download(blob: Blob, fileName: string) {
 
 export async function downloadArchiveZip(
     files: SubtitleFileBlob[],
-    archiveName: string = "archive.zip",
+    archiveName: string = "subtitle_archive.zip",
 ): Promise<void> {
     const zip = JSZip();
     files.forEach(file => {

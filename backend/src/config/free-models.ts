@@ -196,6 +196,66 @@ export const AI_MODELS = [
         isFree: true,
         description: "Бесплатная модель от DS",
     },
+    {
+        id: "Google: Gemini 3 Flash Preview", //valid
+        name: "Google: Gemini 3 Flash Preview",
+        provider: "OpenRouter",
+        // route: "",
+        modelId: "google/gemini-3-flash-preview",
+        isFree: true,
+        description: "Google: Gemini",
+    },
+    {
+        id: "Arcee AI: Trinity Large Preview (free)\n", //valid
+        name: "Arcee AI: Trinity Large Preview (free)\n",
+        provider: "OpenRouter",
+        modelId: "arcee-ai/trinity-large-preview:free",
+        isFree: true,
+        description: "Arcee AI",
+    },
+    {
+        id: "llama-3.3-70b-versatile",
+        name: "Groq:Llama 3.3 70B Versatile",
+        provider: "Groq",
+        modelId: "llama-3.3-70b-versatile",
+        isFree: false,
+        description: "Максимальный интеллект и качество перевода для сложных IT-терминов.",
+    },
+    {
+        id: "llama-3.1-8b-instant",
+        name: "Groq:Llama 3.1 8B Instant",
+        provider: "Groq",
+        modelId: "llama-3.1-8b-instant",
+        isFree: false,
+        description:
+            "Оптимальный баланс скорости и качества, идеален для коротких видео до 10 минут.",
+    },
+    {
+        id: "mixtral-8x7b-32768",
+        name: "Groq:openai/gpt-oss-120b",
+        provider: "Groq",
+        modelId: "openai/gpt-oss-120b",
+        isFree: false,
+        description:
+            "Отличная альтернатива 70B модели, с хорошим пониманием контекста и высокой скоростью.",
+    },
+    {
+        id: "yandexgpt-pro-latest",
+        name: "Yandex: YandexGPT Pro (latest)",
+        provider: "Yandex Cloud",
+        modelId: "yandexgpt/latest", // Используется в URI как gpt://<folder_id>/yandexgpt/latest
+        isFree: false, // Яндекс платный, тарификация по токенам
+        description: "Самая актуальная и мощная модель YandexGPT, отличное качество перевода.",
+    },
+    {
+        id: "yandexgpt-lite",
+        name: "Yandex: YandexGPT Lite",
+        provider: "Yandex Cloud",
+        modelId: "yandexgpt-lite", // Используется в URI как gpt://<folder_id>/yandexgpt-lite
+        isFree: false,
+        description:
+            "Быстрая и легкая модель, хорошо подходит для больших объемов текста и субтитров.",
+    },
 ];
 
 // {

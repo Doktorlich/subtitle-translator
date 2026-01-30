@@ -16,7 +16,6 @@ const systemPrompt = `
 5. НЕ возвращай оригинальный текст, тайминги или метаданные. Только ID и перевод.
 `;
 
-
 // const systemPrompt = `
 // РОЛЬ: Профессиональный переводчик субтитров видеокурсов (EN -> RU).
 //
@@ -32,7 +31,6 @@ const systemPrompt = `
 // `;
 
 export const translateAiQuery = async (original: ISubtitleProject) => {
-
     const response: ChatCompletionResponse = await client.chat.complete({
         model: "mistral-small-latest",
         messages: [

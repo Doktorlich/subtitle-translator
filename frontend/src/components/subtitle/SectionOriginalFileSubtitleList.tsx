@@ -22,7 +22,7 @@ export default function SectionOriginalFileSubtitleList() {
     // const isAnyMutating = useIsMutating();
     // const isTranslating = useIsMutating({ mutationKey: ["translate"] });
     const query = useQuery<IGetFilesResponse, Error, IGetFilesResponse>({
-        queryKey: ["files", type],
+        queryKey: ["files", "original"],
         queryFn: () => getFilesSubtitle(type),
         // refetchInterval: query =>
         //     query.state.data?.filesSubtitle.some(f => f.status === "translating") ? 2000 : false,

@@ -25,7 +25,13 @@ export default function FilePicker() {
     async function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
         const projects = await readFiles(event);
         if (projects) {
-            mutate(projects);
+            // Трансформируем данные, заменяя undefined на []
+            const validProjects = projects.map(project => ({
+                ...project,
+                lines: project.lines ?? [],
+            }));
+
+            mutate(validProjects);
         }
         event.target.value = "";
     }
