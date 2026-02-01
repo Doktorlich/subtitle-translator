@@ -30,9 +30,9 @@ const systemPrompt = `
 // - ВЫХОДНЫЕ ДАННЫЕ: Только валидный JSON, строго повторяющий структуру входного объекта.
 // `;
 
-export const translateAiQuery = async (original: ISubtitleProject) => {
+export const translateAiQuery = async (original: ISubtitleProject, modelAi: string) => {
     const response: ChatCompletionResponse = await client.chat.complete({
-        model: "mistral-small-latest",
+        model: modelAi,
         messages: [
             { role: "system", content: systemPrompt },
             { role: "user", content: JSON.stringify(original) },

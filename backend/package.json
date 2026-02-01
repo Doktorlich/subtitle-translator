@@ -33,6 +33,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "@huggingface/inference": "^4.13.11",
     "@mistralai/mistralai": "^1.13.0",
     "@openrouter/ai-sdk-provider": "^2.0.2",
     "cors": "^2.8.5",

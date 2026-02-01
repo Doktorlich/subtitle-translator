@@ -5,6 +5,7 @@ import { translateAiQueryOR } from "./openrouter/openrouter-client.js";
 import type { ISubtitleProject } from "../@types/subtitle.js";
 import { translateAiQueryGroq } from "./groq/groq-client.js";
 import { translateAiQueryYC } from "./yandex/yandex-client.js";
+import { translateAiQueryHF } from "./huggingface/hugging-face.js";
 
 
 export async function searchAndSelectModelAi(modelAi: TypeModelAi[], original: ISubtitleProject) {
@@ -18,13 +19,15 @@ export async function searchAndSelectModelAi(modelAi: TypeModelAi[], original: I
     console.log("***********************************************************");
     switch (findModel[0]?.provider) {
         case "MistralAI":
-            return await translateAiQuery(original);
+            return await translateAiQuery(original, findModel[0]?.modelId);
         case "OpenRouter":
             return await translateAiQueryOR(original, findModel[0]?.modelId);
         case "Groq":
             return await translateAiQueryGroq(original, findModel[0]?.modelId);
         case "Yandex Cloud":
             return await translateAiQueryYC(original, findModel[0]?.modelId);
+        case "Hugging Face":
+            return await translateAiQueryHF(original, findModel[0]?.modelId);
         default:
             throw new Error("Unknown provider");
     }

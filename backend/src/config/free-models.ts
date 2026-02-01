@@ -163,10 +163,37 @@ export const AI_MODELS = [
     // },
     {
         id: "mistral-direct-small", //valid
-        name: "Mistral Small (Direct)",
+        name: "Mistral:Mistral Small Latest",
         provider: "MistralAI",
         // route: "/api/translate/mistral-direct",
         modelId: "mistral-small-latest",
+        isFree: false,
+        description: "Прямое API Mistral. Самый стабильный и быстрый перевод JSON.",
+    },
+    {
+        id: "open-mistral-nemo", //valid
+        name: "Mistral:open-mistral-nemo",
+        provider: "MistralAI",
+        // route: "/api/translate/mistral-direct",
+        modelId: "open-mistral-nemo",
+        isFree: false,
+        description: "Прямое API Mistral. Самый стабильный и быстрый перевод JSON.",
+    },
+    {
+        id: "ministral-3b-latest", //valid
+        name: "Mistral:ministral-3b-latest",
+        provider: "MistralAI",
+        // route: "/api/translate/mistral-direct",
+        modelId: "ministral-3b-latest",
+        isFree: false,
+        description: "Прямое API Mistral. Самый стабильный и быстрый перевод JSON.",
+    },
+    {
+        id: "ministral-8b-latest", //valid
+        name: "Mistral:ministral-8b-latest",
+        provider: "MistralAI",
+        // route: "/api/translate/mistral-direct",
+        modelId: "ministral-8b-latest",
         isFree: false,
         description: "Прямое API Mistral. Самый стабильный и быстрый перевод JSON.",
     },
@@ -255,6 +282,51 @@ export const AI_MODELS = [
         isFree: false,
         description:
             "Быстрая и легкая модель, хорошо подходит для больших объемов текста и субтитров.",
+    },
+    {
+        id: "hf-qwen-2.5-coder-32b",
+        name: "HF: Qwen 2.5 Coder 32B",
+        provider: "Hugging Face",
+        modelId: "Qwen/Qwen2.5-Coder-32B-Instruct",
+        isFree: true,
+        description:
+            "Специализированная модель для IT. Лучший выбор для курсов: идеально сохраняет код, термины и структуру JSON.",
+    },
+    {
+        id: "hf-qwen-2.5-coder-7B-Instruct",
+        name: "Qwen2.5-Coder-7B-Instruct",
+        provider: "Hugging Face",
+        modelId: "Qwen/Qwen2.5-Coder-7B-Instruct",
+        isFree: true,
+        description:
+            "Специализированная модель для IT. Лучший выбор для курсов: идеально сохраняет код, термины и структуру JSON.",
+    },
+    {
+        id: "hf-llama-3.2-3b",
+        name: "HF: Llama 3.2 3B (Fast)",
+        provider: "Hugging Face",
+        modelId: "meta-llama/Llama-3.2-3B-Instruct",
+        isFree: true,
+        description:
+            "Невероятно быстрая и легкая. Идеальна для простых предложений, работает практически мгновенно.",
+    },
+    {
+        id: "hf-mistral-nemo",
+        name: "HF: Mistral Nemo 12B",
+        provider: "Hugging Face",
+        modelId: "mistralai/Mistral-Nemo-Instruct-2407",
+        isFree: true,
+        description:
+            "Совместная разработка NVIDIA и Mistral. Большое контекстное окно, хорошо держит нить длинных лекций.",
+    },
+    {
+        id: "hf-phi-3.5-mini",
+        name: "HF: Phi-3.5 Mini",
+        provider: "Hugging Face",
+        modelId: "microsoft/Phi-3.5-mini-instruct",
+        isFree: true,
+        description:
+            "Маленькая, но очень «умная» модель от Microsoft. Хорошо справляется с логикой программирования.",
     },
 ];
 
