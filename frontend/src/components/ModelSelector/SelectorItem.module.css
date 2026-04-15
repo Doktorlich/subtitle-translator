@@ -2,8 +2,9 @@
 	cursor: pointer;
 }
 .item:hover{
-	background-color: #ececec;
+	background-color: #e0e0e0;
 }
 .title{
-
+	padding: 2px;
+	font-size: 12px;
 }
