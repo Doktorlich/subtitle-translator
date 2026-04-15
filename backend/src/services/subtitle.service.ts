@@ -6,6 +6,7 @@ import type { IAITranslationResponse } from "../@types/ai.js";
 
 import { SelectedModel } from "../models/SelectedAiModel.model.js";
 import { searchAndSelectModelAi } from "./searchModelAi.service.js";
+import type { LimitFunction } from "p-limit";
 
 
 export const findFilesByType = (fileType: "original" | "translated") => {
@@ -97,4 +98,25 @@ export function selectedAiModel(modelName: string, modelId: string, provider: st
 
 export async function loadSelectedAiModel() {
     return SelectedModel.find();
+}
+
+
+export async function startTranslation(limit:LimitFunction, original: ISubtitleProject[]) {
+    (async () => {
+        const translationPromises = original.map((file, index) =>
+            limit(async () => {
+                try {
+                    await new Promise(resolve => setTimeout(resolve, index * 1100));
+                    await translateProject(file._id);
+                } catch (err: any) {
+                    console.error(`[Task Error] File ${file._id} failed:`, err.message);
+                    await SubtitleProjectModel.findByIdAndUpdate(file._id, {
+                        status: "error",
+                    });
+                }
+            }),
+        );
+        await Promise.all(translationPromises);
+        console.log("Background batch processing finished");
+    })().catch(err => console.error("Queue system error:", err));
 }

@@ -3,6 +3,7 @@ import {
     removeFilesByType,
     findFilesByType,
     translateProject,
+    startTranslation,
 } from "../../services/subtitle.service.js";
 import { SubtitleProjectModel } from "../../models/SubtitleProject.model.js";
 import { catchAsync } from "../../utils/catchAsync.js";
@@ -18,32 +19,12 @@ const getTranslatedFiles = catchAsync(async (req, res, next) => {
 
 const postTranslateFiles = catchAsync(async (req, res, next) => {
     await SubtitleProjectModel.updateMany({ type: "original" }, { status: "translating" });
-
     const original = await findFilesByType("original");
     if (!original || original.length === 0) {
         return next(new AppError("No original files available for translation", 404));
     }
-
     const limit = pLimit(Number(process.env.PER_LIMIT));
-
-    (async () => {
-        const translationPromises = original.map((file,index) =>
-            limit(async () => {
-                try {
-                    await new Promise(resolve => setTimeout(resolve, index * 1100));
-                    await translateProject(file._id);
-                } catch (err: any) {
-                    console.error(`[Task Error] File ${file._id} failed:`, err.message);
-                    await SubtitleProjectModel.findByIdAndUpdate(file._id, {
-                        status: "error",
-                    });
-                }
-            }),
-        );
-        await Promise.all(translationPromises);
-        console.log("Background batch processing finished");
-    })().catch(err => console.error("Queue system error:", err));
-
+    await startTranslation(limit, original);
     res.status(202).json({ message: "Translation process started in the background" });
 });
 
