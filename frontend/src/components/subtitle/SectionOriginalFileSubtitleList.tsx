@@ -15,6 +15,7 @@ import Button from "../UI/ButtonItem.tsx";
 import FilePicker from "../UI/FilePicker.tsx";
 import CardContainer from "../UI/CardContainer.tsx";
 import Loader from "../UI/Loader.tsx";
+import StatusBar from "../UI/StatusBar.tsx";
 
 export default function SectionOriginalFileSubtitleList() {
     //работа с TSQ
@@ -102,6 +103,11 @@ export default function SectionOriginalFileSubtitleList() {
                 </Button>
             </div>
             <SubtitleList>{filesSubtitle}</SubtitleList>
+            {!!data?.filesSubtitle?.length && (
+                <div className={classes.bar}>
+                    {<StatusBar subtitleList={data?.filesSubtitle} />}
+                </div>
+            )}
             <FilePicker />
         </CardContainer>
     );

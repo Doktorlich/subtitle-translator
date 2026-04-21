@@ -17,7 +17,7 @@ export default function OriginalFileActions({
             queryClient.invalidateQueries({ queryKey: ["files"] });
         },
     });
-    const { mutate: mutateTrans, isPending: isPendingTrans, } = useMutation({
+    const { mutate: mutateTrans, isPending: isPendingTrans } = useMutation({
         mutationFn: translateFileById,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["files"] });

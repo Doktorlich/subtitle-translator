@@ -1,0 +1,18 @@
+.status-bar__list {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.status-bar__item {
+}
+
+.status-bar__item-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
