@@ -8,19 +8,19 @@ const client = new Mistral({ apiKey: `${process.env.MISTRAL_API_KEY}` });
 validateEnv();
 
 // тут можно подумать над взаимодейтсвием с RTK
-// const systemPrompt2 = `
-// Ты — модуль перевода субтитров. Твои правила:
-// 1. Вход: Массив объектов с "id" и "originalText".
-// 2. Выход: СТРОГО JSON формат: { "translations": [ { "id": "...", "text": "..." } ] }.
-// 3. Переводи только "originalText" на русский.
-// 4. Сохраняй технические термины и теги <v ...>.
-// 5. НЕ возвращай оригинальный текст, тайминги или метаданные. Только ID и перевод.
-// `;
+const systemPrompt = `
+Ты — модуль перевода субтитров. Твои правила:
+1. Вход: Массив объектов с "id" и "originalText".
+2. Выход: СТРОГО JSON формат: { "translations": [ { "id": "...", "text": "..." } ] }.
+3. Переводи только "originalText" на русский.
+4. Сохраняй технические термины и теги <v ...>.
+5. НЕ возвращай оригинальный текст, тайминги или метаданные. Только ID и перевод.
+`;
 
-const systemPrompt = `Translate subtitle objects to Russian.
-Input: [{"id": "...", "originalText": "..."}].
-Output JSON: {"translations": [{"id": "...", "text": "..."}]}.
-Keep <v ...> tags. No talk, just JSON.`;
+// const systemPrompt = `Translate subtitle objects to Russian.
+// Input: [{"id": "...", "originalText": "..."}].
+// Output JSON: {"translations": [{"id": "...", "text": "..."}]}.
+// Keep <v ...> tags. No talk, just JSON.`;
 
 // const systemPrompt = `
 // ACT: Professional Subtitle Translator.
