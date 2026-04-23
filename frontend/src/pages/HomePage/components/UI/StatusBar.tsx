@@ -1,4 +1,4 @@
-import type { ISubtitleProject, SubtitleStatus } from "../../models/subtitle.ts";
+import type { ISubtitleProject, SubtitleStatus } from "../../../../models/subtitle.ts";
 import CompleteIcon from "./icons/CompleteIcon.tsx";
 import ErrorIcon from "./icons/ErrorIcon.tsx";
 import IdleIcon from "./icons/IdleIcon.tsx";

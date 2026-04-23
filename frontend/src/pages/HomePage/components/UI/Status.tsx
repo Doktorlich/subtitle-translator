@@ -1,4 +1,4 @@
-import type { ISubtitleProject } from "../../models/subtitle.ts";
+import type { ISubtitleProject } from "../../../../models/subtitle.ts";
 import classes from "./Status.module.css";
 
 export default function Status({ status }: Pick<ISubtitleProject, "status">) {

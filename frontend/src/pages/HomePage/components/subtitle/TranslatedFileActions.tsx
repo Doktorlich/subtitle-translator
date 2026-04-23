@@ -1,14 +1,14 @@
-import Button from "../UI/ButtonItem.tsx";
+import Button from "../../../../components/UI/ButtonItem.tsx";
 
 import classes from "./FileActions.module.css";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { deleteFileId, getFilesSubtitle, queryClient } from "../../services/client.ts";
-import Loader from "../UI/Loader.tsx";
-import type { TranslatedFileActionsProps } from "../../models/subtitle.ts";
-import { serializeToVtt } from "../../util/serializeToVtt.ts";
+import { deleteFileId, getFilesSubtitle, queryClient } from "../../../../services/client.ts";
+import Loader from "../../../../components/UI/Loader.tsx";
+import type { TranslatedFileActionsProps } from "../../../../models/subtitle.ts";
+import { serializeToVtt } from "../../../../util/serializeToVtt.ts";
 
-import type { IGetFilesResponse } from "../../models/api-responses.ts";
-import { download } from "../../util/download.ts";
+import type { IGetFilesResponse } from "../../../../models/api-responses.ts";
+import { download } from "../../../../util/download.ts";
 
 export default function TranslatedFileActions({ id }: TranslatedFileActionsProps) {
     const { mutate, isPending } = useMutation({

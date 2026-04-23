@@ -2,11 +2,11 @@ import classes from "./FilePicker.module.css";
 import { useRef } from "react";
 import * as React from "react";
 
-import { readFiles } from "../../util/readFiles.ts";
+import { readFiles } from "../../../../util/readFiles.ts";
 import { useMutation } from "@tanstack/react-query";
-import { postUploadFiles, queryClient } from "../../services/client.ts";
-import Loader from "./Loader.tsx";
-import Button from "./ButtonItem.tsx";
+import { postUploadFiles, queryClient } from "../../../../services/client.ts";
+import Loader from "../../../../components/UI/Loader.tsx";
+import Button from "../../../../components/UI/ButtonItem.tsx";
 
 export default function FilePicker() {
     const { mutate, isPending } = useMutation({
@@ -59,7 +59,7 @@ export default function FilePicker() {
                 >
                     {showLoader ? (
                         <div className={classes["loader-wrapper"]}>
-                            <Loader size={25}  />
+                            <Loader size={25} />
                         </div>
                     ) : (
                         "CHOICE SUBTITLE FILE"

@@ -1,20 +1,20 @@
 import SubtitleList from "./SubtitleList.tsx";
 import SubtitleItem from "./SubtitleItem.tsx";
 import OriginalFileActions from "./OriginalFileActions.tsx";
-import type { ISubtitleProject } from "../../models/subtitle.ts";
+import type { ISubtitleProject } from "../../../../models/subtitle.ts";
 import {
     deleteAllFiles,
     getFilesSubtitle,
     queryClient,
     translateFiles,
-} from "../../services/client.ts";
-import type { IGetFilesResponse } from "../../models/api-responses.ts";
+} from "../../../../services/client.ts";
+import type { IGetFilesResponse } from "../../../../models/api-responses.ts";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import classes from "../../pages/HomePage.module.css";
-import Button from "../UI/ButtonItem.tsx";
+import classes from "../../HomePage.module.css";
+import Button from "../../../../components/UI/ButtonItem.tsx";
 import FilePicker from "../UI/FilePicker.tsx";
-import CardContainer from "../UI/CardContainer.tsx";
-import Loader from "../UI/Loader.tsx";
+import CardContainer from "../../../../components/UI/CardContainer.tsx";
+import Loader from "../../../../components/UI/Loader.tsx";
 import StatusBar from "../UI/StatusBar.tsx";
 
 export default function SectionOriginalFileSubtitleList() {

@@ -1,11 +1,11 @@
-import Button from "../UI/ButtonItem.tsx";
+import Button from "../../../../components/UI/ButtonItem.tsx";
 
 import classes from "./FileActions.module.css";
 import Status from "../UI/Status.tsx";
 import { useMutation } from "@tanstack/react-query";
-import { deleteFileId, queryClient, translateFileById } from "../../services/client.ts";
-import type { OriginalFileActionsProps } from "../../models/subtitle.ts";
-import Loader from "../UI/Loader.tsx";
+import { deleteFileId, queryClient, translateFileById } from "../../../../services/client.ts";
+import type { OriginalFileActionsProps } from "../../../../models/subtitle.ts";
+import Loader from "../../../../components/UI/Loader.tsx";
 
 export default function OriginalFileActions({
     id,

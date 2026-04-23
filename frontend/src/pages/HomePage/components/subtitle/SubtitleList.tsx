@@ -1,4 +1,4 @@
-import type { Children } from "../../models/typesUI.ts";
+import type { Children } from "../../../../models/typesUI.ts";
 import StatusBar from "../UI/StatusBar.tsx";
 import classes from "./SubtitleList.module.css";
 

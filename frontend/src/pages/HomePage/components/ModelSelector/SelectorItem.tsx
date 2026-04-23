@@ -1,9 +1,9 @@
 import classes from "./SelectorItem.module.css";
-import type { SelectorItemProps } from "../../models/typesUI.ts";
-import { chooseItem, toggleSelectorItem } from "../../store/SelectorSlice.tsx";
-import { useAppDispatch } from "../../hooks/hooks.ts";
+import type { SelectorItemProps } from "../../../../models/typesUI.ts";
+import { chooseItem, toggleSelectorItem } from "../../../../store/SelectorSlice.tsx";
+import { useAppDispatch } from "../../../../hooks/hooks.ts";
 import { useMutation } from "@tanstack/react-query";
-import { queryClient, selectedModel } from "../../services/client.ts";
+import { queryClient, selectedModel } from "../../../../services/client.ts";
 
 export default function SelectorItem({
     modelId,

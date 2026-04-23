@@ -1,22 +1,21 @@
 import SubtitleItem from "./SubtitleItem.tsx";
 import TranslatedFileActions from "./TranslatedFileActions.tsx";
 import SubtitleList from "./SubtitleList.tsx";
-import classes from "../../pages/HomePage.module.css";
-import Button from "../UI/ButtonItem.tsx";
-import CardContainer from "../UI/CardContainer.tsx";
+import classes from "../../HomePage.module.css";
+import Button from "../../../../components/UI/ButtonItem.tsx";
+import CardContainer from "../../../../components/UI/CardContainer.tsx";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import type { IGetFilesResponse } from "../../models/api-responses.ts";
-import { deleteAllFiles, getFilesSubtitle, queryClient } from "../../services/client.ts";
-import Loader from "../UI/Loader.tsx";
-import type { ISubtitleProject, SubtitleFileBlob } from "../../models/subtitle.ts";
-import { serializeToVtt } from "../../util/serializeToVtt.ts";
-import { downloadArchiveZip } from "../../util/download.ts";
+import type { IGetFilesResponse } from "../../../../models/api-responses.ts";
+import { deleteAllFiles, getFilesSubtitle, queryClient } from "../../../../services/client.ts";
+import Loader from "../../../../components/UI/Loader.tsx";
+import type { ISubtitleProject, SubtitleFileBlob } from "../../../../models/subtitle.ts";
+import { serializeToVtt } from "../../../../util/serializeToVtt.ts";
+import { downloadArchiveZip } from "../../../../util/download.ts";
 
 export default function SectionTranslatedFileSubtitleList({}) {
     const { data, isPending } = useQuery<IGetFilesResponse, Error, IGetFilesResponse>({
         queryKey: ["files", "translated"],
         queryFn: () => getFilesSubtitle("translated"),
-
     });
     const deleteAll = useMutation({
         mutationFn: () => deleteAllFiles("translated"),
@@ -52,15 +51,14 @@ export default function SectionTranslatedFileSubtitleList({}) {
         if (!data) {
             throw new Error("Files data not found");
         }
-        const fileList:SubtitleFileBlob[] | undefined = data?.filesSubtitle.map(file => {
+        const fileList: SubtitleFileBlob[] | undefined = data?.filesSubtitle.map(file => {
             const content = serializeToVtt([file]);
             const blob = new Blob([content], { type: "text/srt" });
             const fileNameSplit = file.fileName.split(".srt");
             const fileName = fileNameSplit[0] + "__translated.srt";
             return { fileName: fileName, blob: blob };
         });
-        downloadArchiveZip(fileList)
-
+        downloadArchiveZip(fileList);
     }
 
     return (

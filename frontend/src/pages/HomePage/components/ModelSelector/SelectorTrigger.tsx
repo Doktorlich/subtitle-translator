@@ -1,10 +1,10 @@
 import classes from "./SelectorTrigger.module.css";
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks.ts";
-import { chooseItem, toggleSelectorItem } from "../../store/SelectorSlice.tsx";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/hooks.ts";
+import { chooseItem, toggleSelectorItem } from "../../../../store/SelectorSlice.tsx";
 import { useQuery } from "@tanstack/react-query";
 
-import { getDefaultAiModel } from "../../services/client.ts";
-import type { IGetModelAiResponse } from "../../models/api-responses.ts";
+import { getDefaultAiModel } from "../../../../services/client.ts";
+import type { IGetModelAiResponse } from "../../../../models/api-responses.ts";
 import { useEffect } from "react";
 
 export default function SelectorTrigger() {
