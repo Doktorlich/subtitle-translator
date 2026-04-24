@@ -1,0 +1,30 @@
+.settings__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    margin-block: 25px;
+    height: 250px;
+}
+.settings__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+.button {
+    border: 1px solid rgba(63, 63, 61, 0.64);
+    border-radius: 5px;
+    background-color: rgba(175, 175, 175, 0.64);
+    padding: 10px;
+    cursor: pointer;
+    width: 150px;
+}
+.button:hover {
+    background-color: rgba(216, 216, 216, 0.64);
+}
+.button__list {
+    display: flex;
+    gap: 15px;
+	margin-left: auto;
+	margin-right: auto;
+}

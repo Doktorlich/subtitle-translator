@@ -1,3 +1,4 @@
-.settings__item{
-
+.settings__item {
+    display: flex;
+	gap: 5px;
 }

@@ -1,6 +1,6 @@
-.settings__input{
-
+.settings__input {
 }
-.settings__label{
-
+.settings__label {
+    text-transform: capitalize;
+    cursor: pointer;
 }
