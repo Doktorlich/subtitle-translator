@@ -1,7 +1,12 @@
 import { AI_MODELS } from "../../config/free-models.js";
 import { catchAsync } from "../../utils/catchAsync.js";
 import { AppError } from "../../utils/AppError.js";
-import { loadSelectedAiModel, selectedAiModel } from "../../services/subtitle.service.js";
+import {
+    loadSelectedAiModel,
+    loadSettingsAiModel,
+    selectedAiModel,
+} from "../../services/subtitle.service.js";
+import type { RequestHandler } from "express";
 
 const getAiModels = catchAsync(async (req, res, next) => {
     if (AI_MODELS.length === 0) {
@@ -30,4 +35,14 @@ const getDefaultAiModel = catchAsync(async (req, res, next) => {
     res.status(200).json({ message: "Default model retrieved successfully", aiModel });
 });
 
-export { getAiModels, postSelectedAiModel, getDefaultAiModel };
+const getSettingsAi = catchAsync(async (req, res, next) => {
+    const settingsAi = await loadSettingsAiModel();
+    if (!settingsAi) {
+        return next(new AppError("Default AI model not found", 404));
+    }
+    res.status(200).json({ message: "Loading settings ai", aiModel: settingsAi });
+});
+
+const postSettingsAi = catchAsync(async (req, res, next) => {});
+
+export { getAiModels, postSelectedAiModel, getDefaultAiModel, getSettingsAi, postSettingsAi };

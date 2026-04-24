@@ -10,7 +10,13 @@ import {
     postTranslateFileId,
     postTranslateFiles,
 } from "./files/filesTranslated.controller.js";
-import { getAiModels, getDefaultAiModel, postSelectedAiModel } from "./ai/ai.controller.js";
+import {
+    getAiModels,
+    getDefaultAiModel,
+    getSettingsAi,
+    postSelectedAiModel,
+    postSettingsAi,
+} from "./ai/ai.controller.js";
 
 export const filesControllers = {
     postUpload: postUpload,
@@ -27,4 +33,7 @@ export const aiControllers = {
     getAiModel: getAiModels,
     postSelectedAiModel: postSelectedAiModel,
     getDefaultAiModel: getDefaultAiModel,
+
+    getSettingsAi: getSettingsAi,
+    postSettingsAi: postSettingsAi,
 };
