@@ -5,6 +5,7 @@ import type { ISubtitleLine, ISubtitleProject } from "../@types/subtitle.js";
 import type { IAITranslationResponse } from "../@types/ai.js";
 
 import { SelectedModel } from "../models/SelectedAiModel.model.js";
+import { SettingsAiModel } from "../models/SettingsAi.model.js";
 import { searchAndSelectModelAi } from "./searchModelAi.service.js";
 import type { LimitFunction } from "p-limit";
 
@@ -97,10 +98,6 @@ export function selectedAiModel(modelName: string, modelId: string, provider: st
 
 export async function loadSelectedAiModel() {
     return SelectedModel.find();
-}
-
-export async function loadSettingsAiModel() {
-    return SelectedModel.find().select("settings");
 }
 
 export async function startTranslation(limit: LimitFunction, original: ISubtitleProject[]) {
