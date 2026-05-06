@@ -7,7 +7,7 @@ router.get("/models-ai", aiControllers.getAiModel);
 router.get("/info-model", aiControllers.getDefaultAiModel);
 router.post("/select-model", aiControllers.postSelectedAiModel);
 
-router.get("/settings", aiControllers.getSettingsAi);
+router.get("/settings-ai", aiControllers.getSettingsAi);
 router.post("/apply-settings", aiControllers.postSettingsAi);
 
 export default router;
