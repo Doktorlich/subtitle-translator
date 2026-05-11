@@ -36,7 +36,7 @@ const getSettingsAi = catchAsync(async (req, res, next) => {
     if (!settingsAi) {
         return next(new AppError("Default AI model not found", 404));
     }
-    res.status(200).json({ message: "Loading settings ai", aiModel: settingsAi });
+    res.status(200).json({ message: "Loading settings ai", settingsAi: settingsAi });
 });
 
 const postSettingsAi = catchAsync(async (req, res, next) => {
