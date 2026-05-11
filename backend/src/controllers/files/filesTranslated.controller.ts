@@ -4,10 +4,12 @@ import {
     findFilesByType,
     translateProject,
     startTranslation,
+    removeProjectById,
 } from "../../services/subtitle.service.js";
 import { SubtitleProjectModel } from "../../models/SubtitleProject.model.js";
 import { catchAsync } from "../../utils/catchAsync.js";
 import { AppError } from "../../utils/AppError.js";
+import { SettingsAiModel } from "../../models/SettingsAi.model.js";
 
 const getTranslatedFiles = catchAsync(async (req, res, next) => {
     const filesSubtitle = await findFilesByType("translated");
@@ -37,6 +39,14 @@ const postTranslateFileId = catchAsync(async (req, res, next) => {
     (async () => {
         try {
             await translateProject(id);
+            const updatedModel = await SubtitleProjectModel.findById(id);
+            const settingsAi = await SettingsAiModel.findOne();
+
+            if (settingsAi?.deleteTransFile === true) {
+                if (updatedModel?.status === "completed") {
+                    await removeProjectById(id);
+                }
+            }
         } catch (err: any) {
             console.error(`[Task Error] File ${id} failed:`, err.message);
             await SubtitleProjectModel.findByIdAndUpdate(id, {

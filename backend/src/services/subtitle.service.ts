@@ -107,6 +107,14 @@ export async function startTranslation(limit: LimitFunction, original: ISubtitle
                 try {
                     await new Promise(resolve => setTimeout(resolve, index * 1100));
                     await translateProject(file._id);
+
+                    const updatedModel = await SubtitleProjectModel.findById(file._id);
+                    const settingsAi = await SettingsAiModel.findOne();
+                    if (settingsAi?.deleteTransFile === true) {
+                        if (updatedModel?.status === "completed") {
+                            await removeProjectById(file._id);
+                        }
+                    }
                 } catch (err: any) {
                     console.error(`[Task Error] File ${file._id} failed:`, err.message);
                     await SubtitleProjectModel.findByIdAndUpdate(file._id, {
