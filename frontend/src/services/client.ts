@@ -108,7 +108,11 @@ export async function getModelList(): Promise<ISelectModelAiResponse> {
     }
     return await response.json();
 }
-export async function selectedModel(model: { modelId: string; modelName: string; provider:string }) {
+export async function selectedModel(model: {
+    modelId: string;
+    modelName: string;
+    provider: string;
+}) {
     const response = await fetch("/api/v1/ai/select-model", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -139,4 +143,39 @@ export async function getDefaultAiModel() {
         throw error; // TanStack Query перехватит эту ошибку и перейдет в состояние isError
     }
     return await response.json();
+}
+
+export async function getSettingsAi() {
+    const response = await fetch("/api/v1/ai/settings-ai", { method: "GET" });
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        const error = new Error(errorData.message || "An error occurred while load settings ai");
+        console.error(error);
+        throw error;
+    }
+    const data = await response.json();
+    console.log(data);
+    const settings = data.settingsAi[0];
+    return settings;
+}
+export async function postApplySettings(settings: {
+    "settings__delete-trans-file": boolean;
+    "settings__restart-sub-file": boolean;
+}) {
+    const payload = {
+        deleteTransFile: settings["settings__delete-trans-file"],
+        restartSubFile: settings["settings__restart-sub-file"],
+    };
+    const response = await fetch("/api/v1/ai/apply-settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        const error = new Error(errorData.message || "An error occurred while select  model");
+        console.error(error);
+        throw error;
+    }
 }
